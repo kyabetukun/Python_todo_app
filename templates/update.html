@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="form">
+  <form action="/update/{{ post.id }}" method="POST">
+    <label for="content">タスク内容</label>
+    <input type="text" name="content" value={{ post.content }}>
+    <label for="due">日時</label>
+    <input type="date"name="due" value={{ post.due.date() }}required>
+    <input type="submit" value="Change">
+  </form>
+</div>
+{% endblock %}

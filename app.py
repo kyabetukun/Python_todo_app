@@ -39,5 +39,17 @@ def delete(id):
     db.session.commit()
     return redirect('/')
   
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+  post = Post.query.get(id)
+  if request.method == 'GET':
+    return render_template('update.html', post=post)
+  else:
+    post.content = request.form.get('content')
+    post.due = datetime.strptime(request.form.get('due'), '%Y-%m-%d')
+    
+    db.session.commit()
+    return redirect('/')
+  
 if __name__ == "__main__":
   app.run(debug=True)

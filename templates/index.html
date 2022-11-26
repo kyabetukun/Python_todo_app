@@ -5,6 +5,7 @@
 {% for post in posts %}
   <h2>内容: {{ post.content }}</h2>
   <p>期限 : {{ post.due }} </p>
-  <a href="/delete/{{ post.id }}" role="button">Delete</a>
+  <a href="/delete/{{ post.id }}" role="button">削除！</a>
+  <a href="/update/{{ post.id }}" role="button">変更！</a>
 {% endfor %}
 {% endblock %}
