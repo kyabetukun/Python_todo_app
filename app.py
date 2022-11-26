@@ -31,5 +31,13 @@ def index():
 def create():
   return render_template('create.html')
 
+@app.route('/delete/<int:id>')
+def delete(id):
+    post = Post.query.get(id)
+
+    db.session.delete(post)
+    db.session.commit()
+    return redirect('/')
+  
 if __name__ == "__main__":
   app.run(debug=True)
