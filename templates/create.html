@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="form">
+  <form action="/" method="POST">
+    <label for="content">タスク内容</label>
+    <input type="text" name="content">
+    <label for="due">日時</label>
+    <input type="date"name="due" required>
+    <input type="submit" value="Create">
+  </form>
+</div>
+
+{% endblock %}

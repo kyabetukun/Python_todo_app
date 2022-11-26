@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>extended!!!</h1>
+<h1>全てのTodoリスト</h1>
+{% for post in posts %}
+  <h2>内容: {{ post.content }}</h2>
+  <p>期限 : {{ post.due }} </p>
+{% endfor %}
 {% endblock %}
