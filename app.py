@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime,date
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
@@ -14,13 +14,14 @@ class Post(db.Model):
 @app.route('/', methods=['GET', 'POST'])
 def index():
   if request.method == "GET":
-    posts = Post.query.all()
+    posts = Post.query.order_by(Post.due).all()
     return render_template('index.html', posts=posts)
   else:
     content = request.form.get('content')
     due = request.form.get('due')
     
-    due = datetime.strptime(due, '%Y-%m-%d')
+    due = datetime.strptime(due,'%Y-%m-%d')
+    
     new_post = Post(content=content, due=due)
     
     db.session.add(new_post)
@@ -40,6 +41,7 @@ def delete(id):
     return redirect('/')
   
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
+
 def update(id):
   post = Post.query.get(id)
   if request.method == 'GET':
